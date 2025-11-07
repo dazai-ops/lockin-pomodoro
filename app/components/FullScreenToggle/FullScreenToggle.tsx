@@ -3,7 +3,11 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 
-function FullScreenToggle({theme} : {theme: string}) {
+type FullScreenTriggerProps = {
+  theme: string
+}
+
+function FullScreenToggle({theme} : FullScreenTriggerProps) {
   const [isFullscreen, setIsFullscreen] = useState(false)
 
   const toggleFullscreen = () => {

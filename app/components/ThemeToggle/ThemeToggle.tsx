@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Moon, Sun } from 'lucide-react'
 
 type ThemeToggleProps = {
-  onToggle?: (theme: string) => void
+  onToggle?: (theme: string) => void | string,
   initialTheme?: string
 }
 
@@ -26,7 +26,6 @@ export default function ThemeToggle({ onToggle, initialTheme = 'light' } : Theme
       {theme === 'light' ? (
         <Moon className="w-6 h-6 text-white dark:text-black transition-colors duration-300" />
       ) : (
-        // <p>hello</p>
         <Sun className="w-6 h-6 text-white dark:text-white transition-colors duration-300" />
       )}
     </button>

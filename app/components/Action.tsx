@@ -2,9 +2,23 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import { ButtonComponent } from '@/app/components/Button/button';
+import { ButtonComponent } from '@/app/components/Button/Button';
 
-function ActionButton({theme} : {theme: string}) {
+type ActionProps = {
+  theme: string
+  isRunning: boolean
+  startTimer: () => void
+  pauseTimer: () => void
+  resetTimer: () => void
+}
+
+function ActionButton({
+  theme, 
+  isRunning, 
+  startTimer, 
+  pauseTimer, 
+  resetTimer
+} : ActionProps) {
   const [rotating, setRotating] = useState(false);
 
   const handleRotate = () => {
@@ -12,12 +26,17 @@ function ActionButton({theme} : {theme: string}) {
     setTimeout(() => {
       setRotating(false);
     }, 500)
+    resetTimer()
   }
   
   return (
     <div className='flex justify-center items-center mt-10 gap-3'>
-      <ButtonComponent className='text-xl px-7' theme={theme}>
-        Start
+      <ButtonComponent 
+        className='text-xl px-7 w-35'
+        theme={theme}
+        onClick={isRunning ? pauseTimer : startTimer}
+      >
+        {isRunning ? 'Pause' : 'Start'}
       </ButtonComponent>
       <button 
         className='mt-2' 
