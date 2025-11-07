@@ -74,7 +74,10 @@ function PomodoroLayout() {
   }
 
   useEffect(() => {
-    return () => clearInterval(intervalRef.current)
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
   }, [])
 
   useEffect(() => {
