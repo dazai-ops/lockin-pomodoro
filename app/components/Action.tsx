@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import { ButtonComponent } from '@/app/components/Button/Button';
+import { ButtonComponent } from '@/app/components/Button/button';
 
 type ActionProps = {
   theme: string

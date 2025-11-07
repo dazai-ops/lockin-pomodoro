@@ -1,4 +1,4 @@
-import { ButtonComponent } from "@/app/components/Button/Button";
+import { ButtonComponent } from "@/app/components/Button/button";
 import { useState } from "react";
 
 type TabNavigationProps = {
