@@ -1,13 +1,15 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 type FullScreenTriggerProps = {
   theme: string
 }
 
-function FullScreenToggle({theme} : FullScreenTriggerProps) {
+function FullScreenToggle({
+  theme
+} : FullScreenTriggerProps) {
   const [isFullscreen, setIsFullscreen] = useState(false)
 
   const toggleFullscreen = () => {
@@ -36,7 +38,14 @@ function FullScreenToggle({theme} : FullScreenTriggerProps) {
       >
         <Image
           alt='fullscreen'
-          src={isFullscreen && theme === 'light' ? "/ms-black.svg" : isFullscreen && theme === 'dark' ? "/ms-white.svg" : !isFullscreen && theme === 'light' ? "/fs-black.svg" : "/fs-white.svg"}
+          src={isFullscreen && theme === 'light' 
+            ? "/ms-black.svg" 
+            : isFullscreen && theme === 'dark' 
+            ? "/ms-white.svg" 
+            : !isFullscreen && theme === 'light' 
+            ? "/fs-black.svg" 
+            : "/fs-white.svg"
+          }
           width={35}
           height={35}
         />

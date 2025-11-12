@@ -1,4 +1,4 @@
-import { ButtonComponent } from "@/app/components/Button/button";
+import { ButtonComponent } from "@/app/components/ui/Button/button";
 import { useState } from "react";
 
 type TabNavigationProps = {
@@ -6,19 +6,23 @@ type TabNavigationProps = {
   onSection: (section: string) => void;
 };
 
-function TabNavigation({theme, onSection} : TabNavigationProps) {
+function TabNavigationSection({theme, onSection} : TabNavigationProps) {
   const [section, setSection] = useState('pomodoro')
 
   const handleSection = (selectedSection: 'pomodoro' | 'shortBreak' | 'longBreak') => {
-    if(selectedSection === 'pomodoro') {
-      setSection('pomodoro')
-      return onSection('pomodoro')
-    } else if(selectedSection === 'shortBreak') {
-      setSection('shortBreak')
-      return onSection('shortBreak')
-    } else if(selectedSection === 'longBreak') {
-      setSection('longBreak')
-      return onSection('longBreak')
+    switch (selectedSection) {
+      case 'pomodoro':
+        setSection('pomodoro')
+        return onSection('pomodoro')
+      case 'shortBreak':
+        setSection('shortBreak')
+        return onSection('shortBreak')
+      case 'longBreak':
+        setSection('longBreak')
+        return onSection('longBreak')
+      default:
+        setSection('pomodoro')
+        return onSection('pomodoro')
     }
   }
 
@@ -51,4 +55,4 @@ function TabNavigation({theme, onSection} : TabNavigationProps) {
   );
 }
 
-export default TabNavigation;
+export default TabNavigationSection;

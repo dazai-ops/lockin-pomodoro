@@ -4,8 +4,8 @@ import { useState, useRef, useEffect } from 'react';
 import TabNavigation from '@/app/components/TabNavigation';
 import Timer from '@/app/components/Timer';
 import Action from '@/app/components/Action';
-import FullScreenTrigger from '@/app/components/FullScreenToggle/FullScreenToggle';
-import ThemeToggle from '@/app/components/ThemeToggle/ThemeToggle';
+import FullScreenTrigger from '@/app/components/fragments/FullScreenToggle/fullscreenToggle';
+import ThemeToggle from '@/app/components/fragments/ThemeToggle/themeToggle';
 
 function PomodoroLayout() {
   const [theme, setTheme] = useState('light')
@@ -83,6 +83,7 @@ function PomodoroLayout() {
   useEffect(() => {
     const id = setTimeout(() => resetTimer(), 0)
     return () => clearTimeout(id)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [section])
 
   return (

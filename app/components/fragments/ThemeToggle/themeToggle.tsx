@@ -7,7 +7,10 @@ type ThemeToggleProps = {
   initialTheme?: string
 }
 
-export default function ThemeToggle({ onToggle, initialTheme = 'light' } : ThemeToggleProps) {
+export default function ThemeToggle({ 
+  onToggle, 
+  initialTheme = 'light' 
+} : ThemeToggleProps) {
   const [theme, setTheme] = useState(initialTheme)
 
   const handleToggle = () => {

@@ -2,7 +2,8 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import { ButtonComponent } from '@/app/components/Button/button';
+import { ButtonComponent } from '@/app/components/ui/Button/button';
+import TodoList from '@/app/components/TodoList';
 
 type ActionProps = {
   theme: string
@@ -12,10 +13,10 @@ type ActionProps = {
   resetTimer: () => void
 }
 
-function ActionButton({
+function ActionSection({
   theme, 
   isRunning, 
-  startTimer, 
+  startTimer,
   pauseTimer, 
   resetTimer
 } : ActionProps) {
@@ -52,8 +53,17 @@ function ActionButton({
           `}
         />
       </button>
+      <button className='mt-2'>
+        <Image
+          alt='setting'
+          src={theme === 'light' ? "/setting-black.svg" : "/setting-white.svg"}
+          width={45}
+          height={45}
+        />
+      </button>
+      <TodoList theme={theme} />
     </div>
   )
 }
 
-export default ActionButton
+export default ActionSection

@@ -11,7 +11,7 @@ type TimerProps = {
   timeLeft: number
 }
 
-function Timer({theme, timeLeft, formatTime} : TimerProps) {
+function TimerSection({theme, timeLeft, formatTime} : TimerProps) {
   return (
     <div className='flex justify-center items-center'>
       <span className={`${spaceGrotesk.className} text-9xl sm:text-9xl font-bold ${theme === 'light' ? 'text-black' : 'text-white'}`}>
@@ -21,4 +21,4 @@ function Timer({theme, timeLeft, formatTime} : TimerProps) {
   )
 }
 
-export default Timer
+export default TimerSection
