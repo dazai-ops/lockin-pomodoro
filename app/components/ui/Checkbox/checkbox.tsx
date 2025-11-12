@@ -5,10 +5,12 @@ type Task = {
 
 type CheckboxProps = {
   checked: boolean
+  onToggle: () => void
 }
 
 export const CheckboxComponent = ({
-  checked
+  checked,
+  onToggle
 } : CheckboxProps) => {
 
   return (
@@ -18,6 +20,7 @@ export const CheckboxComponent = ({
           type="checkbox" 
           className="sr-only"
           checked={checked}
+          onChange={onToggle}
         />
         <span
           className={`w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center transition-all duration-150
@@ -29,8 +32,8 @@ export const CheckboxComponent = ({
             fill="none" 
             stroke="white" 
             strokeWidth="3" 
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <polyline points="20 6 9 17 4 12" />
           </svg>

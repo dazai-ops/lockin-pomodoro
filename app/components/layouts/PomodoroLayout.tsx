@@ -86,6 +86,11 @@ function PomodoroLayout() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [section])
 
+  useEffect(() => {
+    const formatted = formatTime(timeLeft)
+    document.title = `${formatted}`
+  }, [timeLeft])
+
   return (
     <div 
       className={`w-full min-h-screen flex flex-col justify-center items-center 
