@@ -7,8 +7,8 @@ const spaceGrotesk = Space_Grotesk({
 
 type TimerProps = {
   theme: string
-  formatTime: (seconds: number) => string
   timeLeft: number
+  formatTime: (seconds: number) => string
 }
 
 function TimerSection({

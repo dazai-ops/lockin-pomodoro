@@ -43,7 +43,7 @@ function TodoInput({
       />
       <ButtonComponent
         theme='dark'
-        borderClassName={`mr-[-4px] ${theme === 'dark' ? 'after:border-zinc-600' : 'after:border-white'}`}
+        borderClassName={`mr-[-8px] ${theme === 'dark' ? 'after:border-zinc-600' : 'after:border-white'}`}
         className={`${theme === 'light' ? 'bg-white' : 'bg-zinc-600'}`}
         onClick={handleSubmit}
       > 

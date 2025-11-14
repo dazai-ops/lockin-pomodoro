@@ -8,6 +8,7 @@ type ButtonProps = {
   className? : string
   activeMark?: boolean
   onClick?: () => void
+  disableTranslate?: boolean
 }
 
 export const ButtonComponent = ({
@@ -17,7 +18,8 @@ export const ButtonComponent = ({
   theme, 
   onClick, 
   activeMark,
-  maxWidth
+  maxWidth,
+  disableTranslate
 }: ButtonProps) => {
   return (
     <div 
@@ -27,8 +29,8 @@ export const ButtonComponent = ({
       <button 
         onClick={onClick}
         className={` relative z-10 font-semibold px-5 py-2 sm:px-6 sm:py-2 text-md sm:text-xl rounded-lg 
-          transition-all duration-150 hover:-translate-y-px hover:brightness-110 active:translate-y-1 active:translate-x-1 active:shadow-none
-          ${theme === 'light' ? 'bg-black text-white' : 'bg-white text-black'} ${maxWidth ? 'w-full' : ''} ${className} `}
+          transition-all duration-150 hover:-translate-y-px hover:brightness-110 active:shadow-none
+          ${theme === 'light' ? 'bg-black text-white' : 'bg-white text-black'} ${maxWidth ? 'w-full' : ''} ${disableTranslate ? '' : 'active:translate-y-1 active:translate-x-1'} ${className} `}
       >
         <div 
           className={`w-2 h-2 absolute top-1.5 left-1.5 z-20  rounded-full 

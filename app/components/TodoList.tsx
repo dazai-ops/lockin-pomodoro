@@ -4,6 +4,7 @@ import { ButtonComponent } from '@/app/components/ui/Button/button';
 import TodoInput from '@/app/components/ui/Input/input';
 import CardTodo from './fragments/CardTodo/cardTodo';
 import { toast } from 'sonner';
+import { Space_Grotesk } from 'next/font/google';
 
 type TodoListProps = {
   theme: string
@@ -14,6 +15,11 @@ type Task = {
   task: string
   completed: boolean
 }
+
+const spaceGrotesk = Space_Grotesk({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+})
 
 function TodoListSection({
   theme
@@ -126,7 +132,7 @@ function TodoListSection({
                     />
                   ))
               ) : (
-                <p className="text-center text-zinc-500 mt-4">No tasks found.</p>
+                <p className={`text-center text-zinc-500 mt-2 ${spaceGrotesk.className}`} >No tasks found.</p>
               )}
             </div>
             {/* End of To-do list card */}
@@ -134,9 +140,10 @@ function TodoListSection({
             <ButtonComponent
               theme='light'
               onClick={closeModal}
-              className="bg-purple-600 text-white hover:bg-purple-800 transition rounded-lg"
-              borderClassName='after:rounded-xl after:border-zinc-600 after:border-2 mt-4'
+              className={`bg-purple-600 text-white hover:bg-purple-800 transition rounded-lg ${spaceGrotesk.className} border-2 border-purple-800 active:appearance-none`}
+              borderClassName='after:rounded-xl after:border-purple-600/0 after:border-2 mt-4 after:active-none'
               maxWidth={true}
+              disableTranslate
             >
               Close
             </ButtonComponent>

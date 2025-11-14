@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { ButtonComponent } from '@/app/components/ui/Button/button';
 import TodoList from '@/app/components/TodoList';
+import CustomTime from '@/app/components/CustomTime';
+import { Space_Grotesk } from 'next/font/google';
 
 type ActionProps = {
   theme: string
@@ -11,14 +13,21 @@ type ActionProps = {
   startTimer: () => void
   pauseTimer: () => void
   resetTimer: () => void
+  onSave: (time: { pomodoro: number, shortBreak: number, longBreak: number }) => void
 }
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700']
+})
 
 function ActionSection({
   theme, 
   isRunning, 
   startTimer,
   pauseTimer, 
-  resetTimer
+  resetTimer,
+  onSave
 } : ActionProps) {
   const [rotating, setRotating] = useState(false);
 
@@ -33,7 +42,7 @@ function ActionSection({
   return (
     <div className='flex justify-center items-center mt-10 gap-3'>
       <ButtonComponent 
-        className='text-xl px-7 w-35'
+        className={`text-xl px-7 w-35 ${spaceGrotesk.className}`}
         theme={theme}
         onClick={isRunning ? pauseTimer : startTimer}
       >
@@ -53,15 +62,13 @@ function ActionSection({
           `}
         />
       </button>
-      <button className='mt-2'>
-        <Image
-          alt='setting'
-          src={theme === 'light' ? "/setting-black.svg" : "/setting-white.svg"}
-          width={45}
-          height={45}
-        />
-      </button>
-      <TodoList theme={theme} />
+      <CustomTime 
+        onSave={onSave}
+        theme={theme}
+      />
+      <TodoList 
+        theme={theme} 
+      />
     </div>
   )
 }

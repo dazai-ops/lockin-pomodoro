@@ -10,11 +10,19 @@ import ThemeToggle from '@/app/components/fragments/ThemeToggle/themeToggle';
 function PomodoroLayout() {
   const [theme, setTheme] = useState('light')
   const [section, setSection] = useState('pomodoro')
-  const [timeLeft, setTimeLeft] = useState<number>(25 * 60)
+  const [customTime, setCustomTime] = useState({
+    pomodoro: 25, 
+    shortBreak: 5, 
+    longBreak: 15
+  })
+
+  const [timeLeft, setTimeLeft] = useState<number>(0 * 60)  
   const [isRunning, setIsRunning] = useState<boolean>(false)
+  const [isLoaded, setIsLoaded] = useState<boolean>(false)
+
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const audioRef = useRef<HTMLAudioElement | null>(null)
-
+  
   useEffect(() => {
     audioRef.current = new Audio('/finish.mp3')
   }, [])
@@ -62,17 +70,24 @@ function PomodoroLayout() {
     setIsRunning(false)
     switch (section) {
       case 'pomodoro':
-        setTimeLeft(25 * 60)
+        setTimeLeft(customTime.pomodoro * 60)
         break;
       case 'shortBreak':
-        setTimeLeft(5 * 60)
+        setTimeLeft(customTime.shortBreak * 60)
         break;
       case 'longBreak':
-        setTimeLeft(10 * 60)
+        setTimeLeft(customTime.longBreak * 60)
         break;
     }
   }
 
+  // save when save button (custom time) is clicked
+  const onSave = (time: { pomodoro: number, shortBreak: number, longBreak: number }) => {
+    setCustomTime(time)
+    setTimeLeft(time[section as keyof typeof time] * 60)
+  }
+
+  // clear interval on unmount
   useEffect(() => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current)
@@ -80,12 +95,28 @@ function PomodoroLayout() {
     }
   }, [])
 
+  // get then set custom time when page loads
   useEffect(() => {
-    const id = setTimeout(() => resetTimer(), 0)
-    return () => clearTimeout(id)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    const getCustomTime = () => {
+      const savedTime = localStorage.getItem('customTime')
+      if (savedTime) {
+        const parsedTime = JSON.parse(savedTime)
+        setCustomTime(parsedTime)
+        setTimeLeft(parsedTime.pomodoro * 60)
+      }
+      setIsLoaded(true)
+    }
+    getCustomTime()
+  },[])
+
+  // reset timer when section changes
+  useEffect(() => {
+    if(!isLoaded) return
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    resetTimer()
   }, [section])
 
+  // update document title - showing time left
   useEffect(() => {
     const formatted = formatTime(timeLeft)
     document.title = `${formatted}`
@@ -114,6 +145,7 @@ function PomodoroLayout() {
         startTimer={startTimer}
         pauseTimer={pauseTimer}
         resetTimer={resetTimer}
+        onSave={onSave}
       />
       <FullScreenTrigger 
         theme={theme}
